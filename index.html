@@ -1,0 +1,60 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script>
+		function rotate(source, n) {
+		  for (var i = 0; i < n; ++i) {
+			var firstChar = source[0];
+			var source = source.substring(1, source.length);
+			source = source + firstChar;
+		  }
+		  return source;
+		}
+
+		function spaceOut(upper) {
+		  var result = "";
+		  for(var i = 0; i < upper.length; ++i) {
+			result = result + upper[i] + " ";
+		  }
+		  return result;
+		}
+
+		function squareText(source) {
+		  source = source.replace(" ", "");
+		  var upper = source.toUpperCase();
+		  var rows = [];
+		  for (var i = 0; i < source.length; ++i) {
+			rows.push(spaceOut(rotate(upper, i)));
+		  }
+					  
+		  return rows.join("\n");
+		}
+		
+		function buttonClicked() {
+			var input = document.getElementById("input");
+			var output = document.getElementById("output");
+			
+			output.value = squareText(input.value);
+		}
+	</script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<a class="navbar-brand" href="#">SquareText</a>
+	</nav>
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="col-md-6">
+				<textarea id="input" class="form-control m-5" rows="6" placeholder="Text here" required></textarea>
+			</div>
+			<div class="col-md-6">
+				<textarea id="output" class="form-control m-5" rows="6" placeholder="Output here" required></textarea>
+			</div>
+			
+			<button type="button" class="btn mt-5" onclick="buttonClicked()">Square up dat text</button>
+	</div>
+</div>
+</body>
+</html>
