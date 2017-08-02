@@ -31,11 +31,48 @@
 		  return rows.join("\n");
 		}
 		
-		function buttonClicked() {
+		function squareUpTextYo() {
 			var input = document.getElementById("input");
 			var output = document.getElementById("output");
 			
 			output.value = squareText(input.value);
+		}
+
+		function replaceWithSpaces(source, chars) {
+			var spaces = "";
+			for (var i = 0; i < chars; ++i) {
+				spaces += " ";
+			}
+			return spaces + source.substring(chars - 1, source.length - chars + 1);
+		}
+
+		function circleText(source) {
+			source = source.toUpperCase().replace(/(\n| |\t|\r)/g, "");
+			var halfPoint = Math.floor(source.length / 2) + 1;
+			var lines = [];
+			for  (var i = 0; i < halfPoint; ++i) {
+				if (i == 0) {
+					lines.push(replaceWithSpaces(source, i + 1));
+				} else {
+					lines.push(replaceWithSpaces(source, i));
+				}
+			}
+			var reverseLines = lines.slice(1, lines.length).reverse();
+			var allLines = reverseLines.concat(lines);
+
+			var finalLines = [];
+
+			for (var i = 0; i < allLines.length; ++i) {
+				finalLines.push(spaceOut(allLines[i]))
+			}
+			return finalLines.join("\n");
+		}
+
+		function circleUpTextYo() {
+			var input = document.getElementById("input");
+			var output = document.getElementById("output");
+
+			output.value = circleText(input.value);
 		}
 	</script>
 </head>
@@ -50,10 +87,11 @@
 				<textarea id="input" class="form-control m-5" rows="6" placeholder="Text here" required></textarea>
 			</div>
 			<div class="col-md-6">
-				<textarea id="output" class="form-control m-5" rows="6" placeholder="Output here" required></textarea>
+				<textarea id="output" class="form-control m-5" style="font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;" rows="6" placeholder="Output here" required></textarea>
 			</div>
 			
-			<button type="button" class="btn mt-5" onclick="buttonClicked()">Square up dat text</button>
+			<button type="button" class="btn mt-5" onclick="squareUpTextYo()">Square up dat text</button>
+			<button type="button" class="btn mt-5" onclick="circleUpTextYo()">Circle up dat text</button>
 	</div>
 </div>
 </body>
